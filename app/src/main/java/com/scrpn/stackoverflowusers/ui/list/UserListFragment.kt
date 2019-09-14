@@ -73,4 +73,10 @@ class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
         Toast.makeText(requireContext(), R.string.error_loading_users, Toast.LENGTH_LONG).show()
         Log.e(TAG, "Loading list failed")
     }
+
+    override fun onConnectionAvailabilityChanged(available: Boolean) {
+        if (available) {
+            presenter.refreshItems()
+        }
+    }
 }
