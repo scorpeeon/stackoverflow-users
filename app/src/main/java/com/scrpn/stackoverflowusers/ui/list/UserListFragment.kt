@@ -64,10 +64,12 @@ class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
     }
 
     override fun onUsersLoaded(users: List<User>?) {
+        viewFlipper.displayedChild = 1
         itemListRecyclerView.adapter = UserRecyclerViewAdapter(requireContext(), users ?: ArrayList(), this)
     }
 
     override fun onLoadFailed() {
+        viewFlipper.displayedChild = 0
         Toast.makeText(requireContext(), R.string.error_loading_users, Toast.LENGTH_LONG).show()
         Log.e(TAG, "Loading list failed")
     }

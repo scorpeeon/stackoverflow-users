@@ -5,6 +5,7 @@ It was written in Kotlin and uses the MVP architecture.
 It's a work in progress, notable TODOs:
 - UI improvements
 - Unit Tests
+- MVVM architecture
 
 3rd party libraries used:
 - AndroidX
