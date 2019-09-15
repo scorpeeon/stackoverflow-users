@@ -1,6 +1,6 @@
 package com.scrpn.stackoverflowusers.ui.list
 
-import com.scrpn.stackoverflowusers.network.model.User
+import com.scrpn.stackoverflowusers.domain.model.User
 
 interface UserListScreen {
     fun onConnectionAvailabilityChanged(available: Boolean)

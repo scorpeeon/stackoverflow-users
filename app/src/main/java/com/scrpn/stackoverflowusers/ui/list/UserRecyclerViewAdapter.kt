@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 import com.scrpn.stackoverflowusers.R
-import com.scrpn.stackoverflowusers.network.model.User
+import com.scrpn.stackoverflowusers.domain.model.User
 import kotlinx.android.synthetic.main.item_list_content.view.*
 
 class UserRecyclerViewAdapter internal constructor(

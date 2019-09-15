@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.scrpn.stackoverflowusers.AppComponent
 import com.scrpn.stackoverflowusers.R
-import com.scrpn.stackoverflowusers.network.model.User
+import com.scrpn.stackoverflowusers.domain.model.User
 import com.scrpn.stackoverflowusers.ui.BaseFragment
 import com.scrpn.stackoverflowusers.ui.details.UserDetailsFragment
 import kotlinx.android.synthetic.main.fragment_list.*

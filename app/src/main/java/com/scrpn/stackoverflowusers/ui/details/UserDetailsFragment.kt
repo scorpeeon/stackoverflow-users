@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.scrpn.stackoverflowusers.AppComponent
 import com.scrpn.stackoverflowusers.R
-import com.scrpn.stackoverflowusers.network.model.User
+import com.scrpn.stackoverflowusers.domain.model.User
 import com.scrpn.stackoverflowusers.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_details.*
 import javax.inject.Inject

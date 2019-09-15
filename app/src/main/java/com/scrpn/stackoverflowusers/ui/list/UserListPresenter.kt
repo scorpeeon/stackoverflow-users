@@ -20,7 +20,7 @@ class UserListPresenter @Inject constructor(): RxPresenter<UserListScreen>() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
                     screen?.showLoading(false)
-                    screen?.onUsersLoaded(result.items)
+                    screen?.onUsersLoaded(result)
                 }, { error ->
                     screen?.showLoading(false)
                     screen?.onLoadFailed()
