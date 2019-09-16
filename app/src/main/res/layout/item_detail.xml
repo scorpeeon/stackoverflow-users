@@ -6,10 +6,48 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
+        android:id="@+id/name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        style="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Item Details" />
+        tools:text="Name" />
+
+    <TextView
+        android:id="@+id/userId"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintStart_toStartOf="parent"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="User ID" />
+
+    <TextView
+        android:id="@+id/reputation"
+        app:layout_constraintTop_toBottomOf="@id/userId"
+        app:layout_constraintStart_toStartOf="parent"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Reputation" />
+
+    <TextView
+        android:id="@+id/location"
+        app:layout_constraintTop_toBottomOf="@id/reputation"
+        app:layout_constraintStart_toStartOf="parent"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Location" />
+
+    <TextView
+        android:id="@+id/creationDate"
+        app:layout_constraintTop_toBottomOf="@id/location"
+        app:layout_constraintStart_toStartOf="parent"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Creation Date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

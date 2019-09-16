@@ -4,4 +4,8 @@
     <string name="reputation">Reputation : %s</string>
     <string name="error_loading_users">Error loading users, try again later</string>
     <string name="empty_list">The list will appear here once it was fetched</string>
+    <string name="name">Name: %s</string>
+    <string name="user_id">User ID: %s</string>
+    <string name="location">Location: %s</string>
+    <string name="creation_date">Creation Date: %s</string>
 </resources>
