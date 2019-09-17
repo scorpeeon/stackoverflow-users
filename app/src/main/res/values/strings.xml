@@ -8,4 +8,9 @@
     <string name="user_id">User ID: %s</string>
     <string name="location">Location: %s</string>
     <string name="creation_date">Creation Date: %s</string>
+    <string name="block">Block user</string>
+    <string name="unblock">Unblock user</string>
+    <string name="follow">Follow user</string>
+    <string name="unfollow">Unfollow user</string>
+    <string name="message_select_blocked">Unblock user to be able to select it</string>
 </resources>

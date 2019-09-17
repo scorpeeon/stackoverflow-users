@@ -16,10 +16,13 @@ import javax.inject.Inject
 
 class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
 
+    private var users: List<User> = ArrayList()
     private val TAG = UserListFragment::class.java.simpleName
 
     @Inject
     lateinit var presenter: UserListPresenter
+
+    lateinit var adapter: UserRecyclerViewAdapter
 
     override fun injectDependencies(injector: AppComponent) {
         injector.inject(this)
@@ -46,6 +49,9 @@ class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
     }
 
     private fun setupRecyclerView() {
+        adapter = UserRecyclerViewAdapter(requireContext(), this)
+        itemListRecyclerView.adapter = adapter
+
         swipeRefreshLayout.setColorSchemeColors(
             ContextCompat.getColor(
                 requireContext(),
@@ -55,8 +61,25 @@ class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
         swipeRefreshLayout.setOnRefreshListener { presenter.refreshItems() }
     }
 
-    override fun onUserSelected(userId: Long) {
-        navigateToFragment(UserDetailsFragment.newInstance(userId))
+    override fun onUserClicked(userId: Long) {
+        var user = users.find { user -> user.userId == userId }
+        if (user != null) {
+            if (!user.blocked) {
+                navigateToFragment(UserDetailsFragment.newInstance(userId))
+            } else {
+                Toast.makeText(requireContext(), R.string.message_select_blocked, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onSetUserFollowed(userId: Long, following: Boolean) {
+        users.filter { user -> user.userId == userId }.forEach { user -> user.following = following }
+        adapter.updateItems(users)
+    }
+
+    override fun onSetUserBlocked(userId: Long, blocked: Boolean) {
+        users.filter { user -> user.userId == userId }.forEach { user -> user.blocked = blocked }
+        adapter.updateItems(users)
     }
 
     override fun showLoading(loading: Boolean) {
@@ -65,7 +88,8 @@ class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
 
     override fun onUsersLoaded(users: List<User>?) {
         viewFlipper.displayedChild = 1
-        itemListRecyclerView.adapter = UserRecyclerViewAdapter(requireContext(), users ?: ArrayList(), this)
+        this.users = users ?: ArrayList()
+        adapter.updateItems(this.users)
     }
 
     override fun onLoadFailed() {

@@ -1,5 +1,7 @@
 package com.scrpn.stackoverflowusers.ui.list
 
 internal interface OnUserSelectedListener {
-    fun onUserSelected(userId: Long)
+    fun onUserClicked(userId: Long)
+    fun onSetUserFollowed(userId: Long, following: Boolean)
+    fun onSetUserBlocked(userId: Long, blocked: Boolean)
 }
