@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.gson.Gson
 import com.scrpn.stackoverflowusers.AppComponent
 import com.scrpn.stackoverflowusers.R
 import com.scrpn.stackoverflowusers.domain.model.User
@@ -65,7 +66,9 @@ class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
         var user = users.find { user -> user.userId == userId }
         if (user != null) {
             if (!user.blocked) {
-                navigateToFragment(UserDetailsFragment.newInstance(userId))
+                var gson = Gson()
+                var userJson = gson.toJson(user)
+                navigateToFragment(UserDetailsFragment.newInstance(userJson))
             } else {
                 Toast.makeText(requireContext(), R.string.message_select_blocked, Toast.LENGTH_SHORT).show()
             }

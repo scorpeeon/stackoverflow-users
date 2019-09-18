@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="16dp">
 
     <TextView
         android:id="@+id/name"
@@ -49,5 +50,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Creation Date" />
+
+    <TextView
+        android:id="@+id/following"
+        app:layout_constraintTop_toBottomOf="@id/creationDate"
+        app:layout_constraintStart_toStartOf="parent"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Following" />
+
+    <TextView
+        android:id="@+id/blocked"
+        app:layout_constraintTop_toBottomOf="@id/following"
+        app:layout_constraintStart_toStartOf="parent"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Blocked" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

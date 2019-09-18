@@ -1,6 +1,7 @@
 package com.scrpn.stackoverflowusers.network.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class User (
     @SerializedName("display_name")
@@ -12,6 +13,6 @@ data class User (
     val reputation: Long,
     val location: String?,
     @SerializedName("creation_date")
-    val creationDate: Long
+    val creationDate: Date
 
 )

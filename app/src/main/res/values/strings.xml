@@ -13,4 +13,8 @@
     <string name="follow">Follow user</string>
     <string name="unfollow">Unfollow user</string>
     <string name="message_select_blocked">Unblock user to be able to select it</string>
+    <string name="following">Following</string>
+    <string name="not_following">Not Following</string>
+    <string name="blocked">Blocked</string>
+    <string name="not_blocked">Not Blocked</string>
 </resources>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.scrpn.stackoverflowusers.AppComponent
 import com.scrpn.stackoverflowusers.R
 import com.scrpn.stackoverflowusers.domain.model.User
@@ -15,11 +16,11 @@ import javax.inject.Inject
 class UserDetailsFragment: BaseFragment(), UserDetailsScreen {
 
     companion object{
-        const val ARG_USER_ID = "ARG_USER_ID"
+        const val ARG_USER_JSON = "ARG_USER_JSON"
 
-        fun newInstance(userId: Long): UserDetailsFragment {
+        fun newInstance(userJson: String): UserDetailsFragment {
             val args = Bundle()
-            args.putSerializable(ARG_USER_ID, userId)
+            args.putString(ARG_USER_JSON, userJson)
             val fragment = UserDetailsFragment()
             fragment.arguments = args
             return fragment
@@ -42,8 +43,12 @@ class UserDetailsFragment: BaseFragment(), UserDetailsScreen {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            if (it.containsKey(ARG_USER_ID)) {
-                var userId = it.getLong(ARG_USER_ID)
+            if (it.containsKey(ARG_USER_JSON)) {
+                var gson = Gson()
+                var userString = it.getString(ARG_USER_JSON)
+                if (userString != null) {
+                    user = gson.fromJson(userString, User::class.java)
+                }
             }
         }
     }
@@ -55,13 +60,18 @@ class UserDetailsFragment: BaseFragment(), UserDetailsScreen {
     }
 
     private fun initializeLayout(user: User?) {
-        toolbarLayout.title = getString(R.string.app_name)
-        name.text = getString(R.string.name, user?.displayName)
-        userId.text = getString(R.string.user_id, user?.userId.toString())
-        reputation.text = getString(R.string.reputation, user?.reputation.toString())
-        location.text = getString(R.string.location, user?.location)
-        creationDate.text = getString(R.string.creation_date, user?.creationDate.toString()) // TODO
-        Glide.with(requireContext()).load(user?.profileImage).into(toolbarImage)
+        if (user != null) {
+            toolbarLayout.title = user.displayName
+            name.text = getString(R.string.name, user.displayName)
+            userId.text = getString(R.string.user_id, user.userId.toString())
+            reputation.text = getString(R.string.reputation, user.reputation.toString())
+            location.text = getString(R.string.location, user.location)
+            creationDate.text =
+                getString(R.string.creation_date, user.creationDate.toString()) // TODO
+            blocked.text = getString(if (user.blocked) R.string.blocked else R.string.not_blocked)
+            following.text = getString(if (user.following) R.string.following else R.string.not_following)
+            Glide.with(requireContext()).load(user.profileImage).into(toolbarImage)
+        }
     }
 
     private fun setupToolbar() {
