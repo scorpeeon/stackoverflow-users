@@ -6,10 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class UserListPresenter @Inject constructor(): RxPresenter<UserListScreen>() {
-
-    @Inject
-    lateinit var networkInteractor: NetworkInteractor
+class UserListPresenter @Inject constructor(var networkInteractor: NetworkInteractor): RxPresenter<UserListScreen>() {
 
     fun refreshItems() {
 

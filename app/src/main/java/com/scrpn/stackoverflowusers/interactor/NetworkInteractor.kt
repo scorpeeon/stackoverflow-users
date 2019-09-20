@@ -9,10 +9,7 @@ import javax.inject.Inject
 
 import io.reactivex.Observable
 
-class NetworkInteractor {
-
-    @Inject
-    lateinit var apiService: StackExchangeApi
+class NetworkInteractor @Inject constructor(var apiService: StackExchangeApi) {
 
     init {
         StackOverflowUsersApplication.injector.inject(this)
