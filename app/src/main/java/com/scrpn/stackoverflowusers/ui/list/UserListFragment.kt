@@ -17,7 +17,6 @@ import javax.inject.Inject
 
 class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
 
-    private var users: List<User> = ArrayList()
     private val TAG = UserListFragment::class.java.simpleName
 
     @Inject
@@ -63,7 +62,7 @@ class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
     }
 
     override fun onUserClicked(userId: Long) {
-        var user = users.find { user -> user.userId == userId }
+        var user = presenter.getLocalUsers().find { user -> user.userId == userId }
         if (user != null) {
             if (!user.blocked) {
                 var gson = Gson()
@@ -76,13 +75,13 @@ class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
     }
 
     override fun onSetUserFollowed(userId: Long, following: Boolean) {
-        users.filter { user -> user.userId == userId }.forEach { user -> user.following = following }
-        adapter.updateItems(users)
+        presenter.getLocalUsers().filter { user -> user.userId == userId }.forEach { user -> user.following = following }
+        adapter.updateItems(presenter.getLocalUsers())
     }
 
     override fun onSetUserBlocked(userId: Long, blocked: Boolean) {
-        users.filter { user -> user.userId == userId }.forEach { user -> user.blocked = blocked }
-        adapter.updateItems(users)
+        presenter.getLocalUsers().filter { user -> user.userId == userId }.forEach { user -> user.blocked = blocked }
+        adapter.updateItems(presenter.getLocalUsers())
     }
 
     override fun showLoading(loading: Boolean) {
@@ -91,8 +90,7 @@ class UserListFragment: BaseFragment(), UserListScreen, OnUserSelectedListener {
 
     override fun onUsersLoaded(users: List<User>?) {
         viewFlipper.displayedChild = 1
-        this.users = users ?: ArrayList()
-        adapter.updateItems(this.users)
+        adapter.updateItems(presenter.getLocalUsers())
     }
 
     override fun onLoadFailed() {

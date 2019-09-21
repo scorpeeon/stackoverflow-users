@@ -4,7 +4,7 @@ import android.app.Application
 
 
 import com.scrpn.stackoverflowusers.interactor.InteractorModule
-import com.scrpn.stackoverflowusers.interactor.NetworkInteractor
+import com.scrpn.stackoverflowusers.interactor.ApiInteractor
 import com.scrpn.stackoverflowusers.network.NetworkModule
 import com.scrpn.stackoverflowusers.ui.MainActivity
 import com.scrpn.stackoverflowusers.ui.details.UserDetailsFragment
@@ -21,7 +21,6 @@ interface AppComponent {
 
     fun inject(application: StackOverflowUsersApplication)
 
-    fun inject(networkInteractor: NetworkInteractor)
     fun inject(mainActivity: MainActivity)
     fun inject(userListFragment: UserListFragment)
     fun inject(userDetailsFragment: UserDetailsFragment)

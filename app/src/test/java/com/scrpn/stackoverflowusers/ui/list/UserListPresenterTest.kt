@@ -2,7 +2,7 @@ package com.scrpn.stackoverflowusers.ui.list
 
 import com.scrpn.stackoverflowusers.RxSchedulersOverrideRule
 import com.scrpn.stackoverflowusers.domain.model.User
-import com.scrpn.stackoverflowusers.interactor.NetworkInteractor
+import com.scrpn.stackoverflowusers.interactor.ApiInteractor
 import io.reactivex.Observable
 import org.junit.After
 import org.junit.Before
@@ -22,14 +22,14 @@ class UserListPresenterTest {
     lateinit var userListScreen: UserListScreen
 
     @Mock
-    lateinit var networkInteractor: NetworkInteractor
+    lateinit var apiInteractor: ApiInteractor
 
     lateinit var userListPresenter: UserListPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        userListPresenter = UserListPresenter(networkInteractor)
+        userListPresenter = UserListPresenter(apiInteractor)
     }
 
     @After
@@ -72,7 +72,7 @@ class UserListPresenterTest {
             )
         )
 
-        Mockito.`when`(networkInteractor.getUsers()).thenReturn(Observable.just(testUsers))
+        Mockito.`when`(apiInteractor.getUsers()).thenReturn(Observable.just(testUsers))
 
         userListPresenter.attachScreen(userListScreen)
         userListPresenter.refreshItems()
@@ -85,7 +85,7 @@ class UserListPresenterTest {
 
     @Test
     fun handeFailToLoad() {
-        Mockito.`when`(networkInteractor.getUsers()).thenReturn(Observable.error(RuntimeException("error")))
+        Mockito.`when`(apiInteractor.getUsers()).thenReturn(Observable.error(RuntimeException("error")))
 
         userListPresenter.attachScreen(userListScreen)
         userListPresenter.refreshItems()

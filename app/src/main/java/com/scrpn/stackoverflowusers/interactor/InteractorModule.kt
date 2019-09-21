@@ -1,6 +1,7 @@
 package com.scrpn.stackoverflowusers.interactor
 
-import com.scrpn.stackoverflowusers.network.StackExchangeApi
+import com.scrpn.stackoverflowusers.domain.InMemoryDataSource
+import com.scrpn.stackoverflowusers.network.NetworkDataSource
 import dagger.Module
 import dagger.Provides
 
@@ -8,7 +9,8 @@ import dagger.Provides
 class InteractorModule {
 
     @Provides
-    fun provideNetworkInteractor(apiService: StackExchangeApi): NetworkInteractor {
-        return NetworkInteractor(apiService)
+    fun provideApiInteractor(networkDataSource: NetworkDataSource,
+                             inMemoryDataSource: InMemoryDataSource): ApiInteractor {
+        return ApiInteractor(networkDataSource, inMemoryDataSource)
     }
 }
