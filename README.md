@@ -2,9 +2,9 @@
 This is a demo Android app for displaying Stackoverflow users.
 It was written in Kotlin and uses the MVP architecture.
 
-It's a work in progress, notable TODOs:
+It's a basic demo project, notable TODOs:
 - UI improvements
-- Unit Tests
+- more Unit Tests
 - MVVM architecture
 
 3rd party libraries used:

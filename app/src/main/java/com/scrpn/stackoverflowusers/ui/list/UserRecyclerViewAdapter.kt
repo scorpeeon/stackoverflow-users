@@ -79,8 +79,8 @@ class UserRecyclerViewAdapter internal constructor(
         holder.subtitleTextView.text = context.getString(R.string.reputation, user.reputation.toString())
         holder.followingImageView.setImageDrawable(
             context.getDrawable(
-                if (user.following) android.R.drawable.btn_star_big_on
-                else android.R.drawable.btn_star_big_off
+                if (user.following) R.drawable.ic_star
+                else R.drawable.ic_star_empty
             )
         )
 
