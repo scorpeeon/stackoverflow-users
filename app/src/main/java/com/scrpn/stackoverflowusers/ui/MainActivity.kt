@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Build
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -45,21 +46,16 @@ class MainActivity : BaseActivity() {
         injector.inject(this)
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, UserListFragment())
-            .commit()
-    }
-
     fun loadFragment(fragment: Fragment) {
+        if (supportFragmentManager.isStateSaved) {
+            return
+        }
+
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
+            .replace(R.id.fragmentContainer, fragment, fragment.nameTag)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .addToBackStack(null)
+            .addToBackStack(fragment.nameTag)
             .commit()
     }
 
@@ -73,6 +69,10 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (supportFragmentManager.backStackEntryCount < 1) {
+            loadFragment(UserListFragment())
+        }
+
         manager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             manager?.registerDefaultNetworkCallback(networkCallback)
@@ -83,4 +83,25 @@ class MainActivity : BaseActivity() {
         manager?.unregisterNetworkCallback(networkCallback)
         super.onDestroy()
     }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 1) {
+            pop()
+        } else {
+            this.finish()
+        }
+    }
+
+    fun pop(): Boolean {
+        if (supportFragmentManager.isStateSaved) {
+            return false
+        }
+
+        return supportFragmentManager.popBackStackImmediate()
+    }
+
+    internal val Fragment.nameTag: String
+        get() {
+            return this::class.qualifiedName!!
+        }
 }
